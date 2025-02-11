@@ -1,17 +1,28 @@
-def power(base, exponent):
+def power(base, exponent) -> int:
     """Return base raised to the power of exponent computed recursively."""
     if exponent == 0:  
         return 1
     return base * power(base, exponent - 1)
 
-print("2^3 =", power(2, 3)) 
+print(power(2, 3)) 
 
-def fibonacci(n):
-    """Return the nth Fibonacci number computed recursively."""
-    if n == 0:  
-        return 0
-    elif n == 1:
-        return 1
-    return fibonacci(n - 1) + fibonacci(n - 2) 
+def is_prime(n: int, divisor: int = 2) -> bool:
+    """
+    Return True if n is prime, False otherwise.
 
-print("10th Fibonacci number:", fibonacci(10)) 
+    A prime number is greater than 1 and has no positive divisors other
+    than 1 and itself. We use a helper parameter 'divisor' which starts at 2
+    and goes up to √n (since a larger factor would have a complementary
+    factor below √n).
+    """
+    if n < 2:
+        return False 
+    if divisor * divisor > n:
+        return True  
+    
+    if n % divisor == 0:
+        return False
+    
+    return is_prime(n, divisor + 1)
+
+print(is_prime(5))
